@@ -37,6 +37,7 @@ private static Scanner scanner;
 		
 		sysout
 		asdhhfasldl
+		Hello world
 		
 	}
 }
