@@ -35,13 +35,7 @@ private static Scanner scanner;
 			
 		}
 		
-<<<<<<< HEAD
-		
-=======
-		sysout
-		asdhhfasldl
-		Hello world
->>>>>>> 98f5d66d444c772cc6ece277179b8f7d61110786
+
 		
 	}
 }
