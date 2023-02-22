@@ -35,8 +35,7 @@ private static Scanner scanner;
 			
 		}
 		
-		sysout
-		asdhhfasldl
+		
 		
 	}
 }
