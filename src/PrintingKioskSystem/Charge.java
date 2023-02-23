@@ -6,23 +6,29 @@ public class Charge {
 
 	
 	double charge, surcharge;
+	private String option,addOption;
+	private int quantity;
 	
-	public double calNormalCharge(String order, int quantity) {
+	
+	public Charge(String option, int quantity) {
+		this.option = option;
+		this.quantity = quantity;
+	}
+	
+	public double calNormalCharge() {
 		
-		switch(order) {
+		switch(option) {
 		case "A": charge = getBlackAndWhiteCharge(quantity); break;
 		case "B": charge = getColourCharge(quantity); break;
 		case "C": charge = getNormalCharge(quantity); break;
 		case "D": charge = getPassportCharge(quantity); break;
 		}
-		
-		
 		return charge*quantity;
 	}
 	
-	public double calSurcharge(int quantity, String opt) {
+	public double calSurcharge() {
 		
-		surcharge = getAddOptSurcharge(opt);
+		surcharge = getAddOptSurcharge(addOption);
 		return surcharge*quantity;
 	}
 	
@@ -71,8 +77,8 @@ public class Charge {
 			return 0.75;
 	}
 	
-	public double getAddOptSurcharge(String opt) {
-		if(opt.equals("A"))
+	public double getAddOptSurcharge(String addOpt) {
+		if(addOpt.equals("A"))
 			return 0.1;
 		else
 			return 0.15;
