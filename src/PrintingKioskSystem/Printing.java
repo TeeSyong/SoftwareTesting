@@ -9,7 +9,7 @@ public class Printing {
 		
 		
 		Order order = new Order();
-		order.document();
+		//order.getMainOpt1();
 	}
 	
 	
