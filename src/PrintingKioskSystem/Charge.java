@@ -7,12 +7,17 @@ public class Charge {
 	
 	double charge, surcharge;
 	private String option,addOption;
-	private int quantity;
+	private int quantity, addOpt, ttlQtt;
 	
 	
 	public Charge(String option, int quantity) {
 		this.option = option;
 		this.quantity = quantity;
+	}
+	
+	public Charge(int addOpt,int ttlQtt) {
+		this.addOpt = addOpt;
+		this.ttlQtt = ttlQtt;
 	}
 	
 	public double calNormalCharge() {
@@ -28,8 +33,8 @@ public class Charge {
 	
 	public double calSurcharge() {
 		
-		surcharge = getAddOptSurcharge(addOption);
-		return surcharge*quantity;
+		surcharge = getAddOptSurcharge();
+		return surcharge*ttlQtt;
 	}
 	
 	
@@ -77,8 +82,8 @@ public class Charge {
 			return 0.75;
 	}
 	
-	public double getAddOptSurcharge(String addOpt) {
-		if(addOpt.equals("A"))
+	public double getAddOptSurcharge() {
+		if(addOpt==1)
 			return 0.1;
 		else
 			return 0.15;
