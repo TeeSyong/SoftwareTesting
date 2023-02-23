@@ -5,17 +5,27 @@ import java.util.*;
 public class Charge {
 
 	
+	double charge, surcharge;
 	
-	public void calCharge(String order, int quantity, String opt) {
-		double charge, surcharge;
+	public double calNormalCharge(String order, int quantity) {
+		
 		switch(order) {
 		case "A": charge = getBlackAndWhiteCharge(quantity); break;
 		case "B": charge = getColourCharge(quantity); break;
 		case "C": charge = getNormalCharge(quantity); break;
 		case "D": charge = getPassportCharge(quantity); break;
 		}
-		surcharge = getAddOptSurcharge(opt);
+		
+		
+		return charge*quantity;
 	}
+	
+	public double calSurcharge(int quantity, String opt) {
+		
+		surcharge = getAddOptSurcharge(opt);
+		return surcharge*quantity;
+	}
+	
 	
 	public double getBlackAndWhiteCharge(int quantity){
 		if(quantity < 5)
