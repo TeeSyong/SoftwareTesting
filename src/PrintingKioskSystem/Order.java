@@ -6,11 +6,34 @@ public class Order {
 
 	
 	private static Scanner scanner;
-	private static String mainOpt1,mainOpt2, mainOrderType;
-	private static int mainQtt1, mainQtt2;
+	private static String mainOpt1,mainOpt2, mainOrderType, mainAddOpt;
+	private static int mainQtt1, mainQtt2, mainCheckLoop;
 	private static double mainTotalCharge;
-	static int mainCheckLoop;
 	
+	public String getMainOpt1(){
+		return mainOpt1;
+	}
+	public String getMainOpt2() {
+		return mainOpt2;
+	}
+	public String getMainOrderType() {
+		return mainOrderType;
+	}
+	public String getMainAddOpt() {
+		return mainAddOpt;
+	}
+	public int getMainQtt1() {
+		return mainQtt1;
+	}
+	public int getMainQtt2() {
+		return mainQtt2;
+	}
+	public int getMainCheckLoop() {
+		return mainCheckLoop;
+	}
+	public double getMainTotalCharge() {
+		return mainTotalCharge;
+	}
 	
 	
 	public static void main(String[] args) {
@@ -203,7 +226,6 @@ public class Order {
 			checkLoop++;
 		}while(error);
 		mainCheckLoop = checkLoop;
-		System.out.println("CheckLoop: "+checkLoop);
 		
 		//Calculate total quantity for photos
 		ttlQtt = normalQtt + passportQtt;
@@ -219,6 +241,10 @@ public class Order {
 			
 			if(addOpt==1||addOpt==2) {
 				surcharge = new Charge(addOpt,ttlQtt);
+				if(addOpt==1)
+					mainAddOpt="High quality paper";
+				else 
+					mainAddOpt="Design effect";
 				error=false;
 			}
 			else if(addOpt==3) {
