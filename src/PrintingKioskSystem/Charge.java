@@ -5,7 +5,7 @@ import java.util.*;
 public class Charge {
 
 	
-	double charge, surcharge;
+	private double charge, surcharge;
 	private String option,addOption;
 	private int quantity, addOpt, ttlQtt;
 	
