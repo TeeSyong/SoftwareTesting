@@ -1,11 +1,10 @@
 package PrintingKioskSystem;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Order {
 
-	public static ArrayList<Charge> chargeArr = new ArrayList<Charge>();
+	
 	private static Scanner scanner;
 	
 	
@@ -37,9 +36,9 @@ public class Order {
 	
 	public static void document() {
 		String opt,choice;
-		int bwQtt = 0,colorQtt = 0,ttlQtt=0;
+		int bwQtt = 0,colorQtt = 0,ttlQtt;
 		double totalCharge= 0;
-		Charge bwCharge = null, colorCharge= null;
+		Charge ch1 = null, ch2= null;
 		boolean error,er;
 		
 		do {
@@ -49,7 +48,7 @@ public class Order {
 			if(opt.equals("A")) {
 				System.out.print("Enter quantity in black and white: ");
 				bwQtt = scanner.nextInt();
-				bwCharge = new Charge(opt,bwQtt);
+				ch1 = new Charge(opt,bwQtt);
 				
 				do {
 					er=false;
@@ -60,7 +59,6 @@ public class Order {
 						er=false;
 					}
 					else if(choice.equals("N")) {
-						chargeArr.add(bwCharge);
 						System.out.println("Proceeding to billing...");
 						er=false;
 					}
@@ -74,7 +72,7 @@ public class Order {
 			{
 				System.out.print("Enter quantity in colour: ");
 				colorQtt = scanner.nextInt();
-				colorCharge = new Charge(opt,colorQtt);
+				ch2 = new Charge(opt,colorQtt);
 				
 				do {
 					er=false;
@@ -85,7 +83,6 @@ public class Order {
 						er=false;
 					}
 					else if(choice.equals("N")) {
-						chargeArr.add(colorCharge);
 						System.out.println("Proceeding to billing...");
 						er=false;
 					}
@@ -103,33 +100,22 @@ public class Order {
 		}while(error);
 
 		//Calculate total quantity for documents
-		for(int i=0;i<chargeArr.size();i++)
-		{
-			ttlQtt+=chargeArr.get(i).getQuantity();
-		}
-		//ttlQtt = bwQtt + colorQtt;
+		ttlQtt = bwQtt + colorQtt;
 		
 		// this part to check the combination of billing
 		// exp: some buy normal and passport without surcharge, some buy normal with surcharge
 				
 		// != null --> inside particular object got something == people buy the option(normal/passport/addOpt)
-		for(int i=0;i<chargeArr.size();i++)
-		{
-			if(bwCharge != null && colorCharge == null) {
-				//if(chargeArr.get(i) instanceof bwCharge)
-				{
-					totalCharge +=bwCharge.calNormalCharge();
-				}
 				
-			}
-			else if (bwCharge == null && colorCharge != null) {
-				totalCharge = colorCharge.calNormalCharge();
-			}
-			else if(bwCharge != null && colorCharge != null) {
-				totalCharge = bwCharge.calNormalCharge() + colorCharge.calNormalCharge();
-			}
+		if(ch1 != null && ch2 == null) {
+			totalCharge = ch1.calNormalCharge();
 		}
-
+		else if (ch1 == null && ch2 != null) {
+			totalCharge = ch2.calNormalCharge();
+		}
+		else if(ch1 != null && ch2 != null) {
+			totalCharge = ch1.calNormalCharge() + ch2.calNormalCharge();
+		}
 		
 		System.out.println("Total charges: "+ totalCharge);
 	
@@ -140,7 +126,7 @@ public class Order {
 		String opt, choice;
 		int ttlQtt, normalQtt = 0, passportQtt = 0, addOpt;
 		double totalCharge = 0;
-		Charge normalCharge = null, passportCharge= null, surcharge = null;
+		Charge ch3 = null, ch4= null, surcharge = null;
 		boolean error, er;
 		
 		do {
@@ -150,7 +136,7 @@ public class Order {
 			if(opt.equals("C")) {
 				System.out.print("Enter quantity in normal(4R): ");
 				normalQtt = scanner.nextInt();
-				normalCharge = new Charge(opt,normalQtt);
+				ch3 = new Charge(opt,normalQtt);
 				
 				do {
 					er=false;
@@ -173,7 +159,7 @@ public class Order {
 			{
 				System.out.print("Enter quantity in passport: ");
 				passportQtt = scanner.nextInt();
-				passportCharge = new Charge(opt,passportQtt);
+				ch4 = new Charge(opt,passportQtt);
 				
 				do {
 					er=false;
@@ -230,23 +216,23 @@ public class Order {
 		
 		// != null --> inside particular object got something == people buy the option(normal/passport/addOpt)
 		
-		if(normalCharge != null && passportCharge == null && surcharge == null) {
-			totalCharge = normalCharge.calNormalCharge();
+		if(ch3 != null && ch4 == null && surcharge == null) {
+			totalCharge = ch3.calNormalCharge();
 		}
-		else if (normalCharge == null && passportCharge != null && surcharge == null) {
-			totalCharge = passportCharge.calNormalCharge();
+		else if (ch3 == null && ch4 != null && surcharge == null) {
+			totalCharge = ch4.calNormalCharge();
 		}
-		else if (normalCharge != null && passportCharge != null && surcharge == null) {
-			totalCharge = normalCharge.calNormalCharge() + passportCharge.calNormalCharge();
+		else if (ch3 != null && ch4 != null && surcharge == null) {
+			totalCharge = ch3.calNormalCharge() + ch4.calNormalCharge();
 		}
-		else if (normalCharge != null && passportCharge == null && surcharge != null) {
-			totalCharge = normalCharge.calNormalCharge() + surcharge.calSurcharge();
+		else if (ch3 != null && ch4 == null && surcharge != null) {
+			totalCharge = ch3.calNormalCharge() + surcharge.calSurcharge();
 		}
-		else if (normalCharge == null && passportCharge != null && surcharge != null) {
-			totalCharge = passportCharge.calNormalCharge() + surcharge.calSurcharge();
+		else if (ch3 == null && ch4 != null && surcharge != null) {
+			totalCharge = ch4.calNormalCharge() + surcharge.calSurcharge();
 		}
-		else if(normalCharge != null && passportCharge != null && surcharge != null) {
-			totalCharge = normalCharge.calNormalCharge() + passportCharge.calNormalCharge() + surcharge.calSurcharge();
+		else if(ch3 != null && ch4 != null && surcharge != null) {
+			totalCharge = ch3.calNormalCharge() + ch4.calNormalCharge() + surcharge.calSurcharge();
 		}
 		
 		

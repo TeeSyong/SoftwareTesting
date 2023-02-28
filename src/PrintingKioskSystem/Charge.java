@@ -9,10 +9,7 @@ public class Charge {
 	private String option,addOption;
 	private int quantity, addOpt, ttlQtt;
 	
-	public int getQuantity()
-	{
-		return quantity;
-	}
+	
 	public Charge(String option, int quantity) {
 		this.option = option;
 		this.quantity = quantity;
