@@ -79,8 +79,13 @@ public class Order {
 			System.out.print("Enter option(A-Black & White/B-Colour): ");
 			opt = scanner.next().toUpperCase();
 			if (opt.equals("A") || opt.equals("B")) {
-
-				System.out.print("Enter quantity in black and white: ");
+				if(opt.equals("A")) {
+					System.out.print("Enter quantity in black and white: ");
+				}
+				else if(opt.equals("B")) {
+					System.out.print("Enter quantity in color: ");
+				}
+				
 				Qtt = scanner.nextInt();
 				PrintingOption pOpt = PrintingOption.Unknown;
 				if (opt.equals("A")) {
@@ -111,7 +116,14 @@ public class Order {
 			System.out.print("Enter option(C-Normal(4R)/D-Passport): ");
 			opt = scanner.next().toUpperCase();
 			if (opt.equals("C") || opt.equals("D")) {
-				System.out.print("Enter quantity in normal(4R): ");
+				if(opt.equals("C")) {
+					System.out.print("Enter quantity in normal(4R): ");
+				}
+				else if(opt.equals("D")) {
+					System.out.print("Enter quantity in passport: ");
+				}
+				
+				
 				Qtt = scanner.nextInt();
 
 				PrintingOption pOpt = PrintingOption.Unknown;
