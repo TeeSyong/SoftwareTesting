@@ -73,47 +73,54 @@ public class Order {
 		String opt;
 		int Qtt = 0;
 		boolean isDocumentError;
+		boolean isQuantityError;
 
 		do {
 			isDocumentError = false;
 			System.out.print("Enter option(A-Black & White/B-Colour): ");
 			opt = scanner.next().toUpperCase();
-			if (opt.equals("A") || opt.equals("B")) {
-				if(opt.equals("A")) {
-					System.out.print("Enter quantity in black and white: ");
-				}
-				else if(opt.equals("B")) {
-					System.out.print("Enter quantity in color: ");
-				}
-				try
-				{
-					Qtt = scanner.nextInt();
-					if(Qtt>50) {
-						System.out.println("Invalid Quantity, Maximum 50 copies per printing");
-					}
-					else if(Qtt<=0) {
-						System.out.println("Invalid Quantity, please enter quantity ranging from 1-50");
-					}
-					else {
-						PrintingOption pOpt = PrintingOption.Unknown;
-						if (opt.equals("A")) {
-							pOpt = PrintingOption.BlackWhite;
-						} else if (opt.equals("B")) {
-							pOpt = PrintingOption.Colour;
-						}
-						PrintingDocument newDoc = new PrintingDocument(pOpt, Qtt);
-						printingOrders.add(newDoc);
-					}
-				}
-				catch(Exception e){
-					e.printStackTrace();
-					System.out.println("Invalid Option please enter integer only");
-				}
-			} else {
-				System.out.println("Invalid choice. Please enter again.");
-				isDocumentError = true;
-			}
+				do {
+					isQuantityError=false;
 
+					if (opt.equals("A") || opt.equals("B")) {
+						if(opt.equals("A")) {
+							System.out.print("Enter quantity in black and white: ");
+						}
+						else if(opt.equals("B")) {
+							System.out.print("Enter quantity in color: ");
+						}
+					try
+					{
+						Qtt = scanner.nextInt();
+						if(Qtt>50) {
+							System.out.println("Invalid Quantity, Maximum 50 copies per printing");
+							isQuantityError=true;
+						}
+						else if(Qtt<=0) {
+							System.out.println("Invalid Quantity, please enter quantity ranging from 1-50");
+							isQuantityError=true;
+						}
+						else {
+							PrintingOption pOpt = PrintingOption.Unknown;
+							if (opt.equals("A")) {
+								pOpt = PrintingOption.BlackWhite;
+							} else if (opt.equals("B")) {
+								pOpt = PrintingOption.Colour;
+							}
+							PrintingDocument newDoc = new PrintingDocument(pOpt, Qtt);
+							printingOrders.add(newDoc);
+						}
+					}
+					catch(Exception e){
+						e.printStackTrace();
+						System.out.println("Invalid Option please enter integer only");
+					}
+				} else {
+					System.out.println("Invalid choice. Please enter again.");
+					isDocumentError = true;
+				}
+				}while(isQuantityError);
+				
 		} while (isDocumentError);
 
 	}
@@ -123,62 +130,68 @@ public class Order {
 		String opt;
 		int Qtt;
 		boolean isPhotoError;
-
+		boolean isQuantityError;
 		do {
 			isPhotoError = false;
 			System.out.print("Enter option(C-Normal(4R)/D-Passport): ");
 			opt = scanner.next().toUpperCase();
-			if (opt.equals("C") || opt.equals("D")) {
-				if(opt.equals("C")) {
-					System.out.print("Enter quantity in normal(4R): ");
-				}
-				else if(opt.equals("D")) {
-					System.out.print("Enter quantity in passport: ");
-				}
-				try
-				{
-					Qtt = scanner.nextInt();
-					if(Qtt>50) {
-						System.out.println("Invalid Quantity, Maximum 50 copies per printing");
-					}
-					else if(Qtt<=0) {
-						System.out.println("Invalid Quantity, please enter quantity ranging from 1-50");
-					}
-					else {		
-						PrintingOption pOpt = PrintingOption.Unknown;
-						if (opt.equals("C")) {
-							pOpt = PrintingOption.Normal;
-						} else if (opt.equals("D")) {
-							pOpt = PrintingOption.Passport;
-						}
-						PrintingPhoto newPhoto = new PrintingPhoto(pOpt, Qtt);
 
-						System.out.println("Additional Option");
-						System.out.println("1. High quality paper");
-						System.out.println("2. Design effect");
-						System.out.println("None (Enter any key to skip)");
-						System.out.print("Enter Option: ");
-						String addOpt = scanner.nextLine();
-						scanner.nextLine();
-						if (addOpt.equals("1")) {
-							newPhoto.isHighQualityPaper = true;
-						} else if (addOpt.equals("2")) {
-							newPhoto.isDesignEffect = true;
+				do {
+					isQuantityError=false;
+					if (opt.equals("C") || opt.equals("D")) {
+						if(opt.equals("C")) {
+							System.out.print("Enter quantity in normal(4R): ");
 						}
+						else if(opt.equals("D")) {
+							System.out.print("Enter quantity in passport: ");
+						}				
+					try
+					{
+						Qtt = scanner.nextInt();
+						if(Qtt>50) {
+							System.out.println("Invalid Quantity, Maximum 50 copies per printing");
+							isQuantityError=true;
+						}
+						else if(Qtt<=0) {
+							System.out.println("Invalid Quantity, please enter quantity ranging from 1-50");
+							isQuantityError=true;
+						}
+						else {		
+							PrintingOption pOpt = PrintingOption.Unknown;
+							if (opt.equals("C")) {
+								pOpt = PrintingOption.Normal;
+							} else if (opt.equals("D")) {
+								pOpt = PrintingOption.Passport;
+							}
+							PrintingPhoto newPhoto = new PrintingPhoto(pOpt, Qtt);
 
-						printingOrders.add(newPhoto);
+							System.out.println("Additional Option");
+							System.out.println("1. High quality paper");
+							System.out.println("2. Design effect");
+							System.out.println("None (Enter any key to skip)");
+							System.out.print("Enter Option: ");
+							String addOpt = scanner.nextLine();
+							scanner.nextLine();
+							if (addOpt.equals("1")) {
+								newPhoto.isHighQualityPaper = true;
+							} else if (addOpt.equals("2")) {
+								newPhoto.isDesignEffect = true;
+							}
+
+							printingOrders.add(newPhoto);
+						}
 					}
-				}
-				catch(Exception e){
-					e.printStackTrace();
-					System.out.println("Invalid Option please enter integer only");
-				}
+					catch(Exception e){
+						e.printStackTrace();
+						System.out.println("Invalid Option please enter integer only");
+					}
+					} else {
+						System.out.println("Invalid choice. Please enter again.");
+						isPhotoError = true;
+					}
+				}while(isQuantityError);
 				
 
-			} else {
-				System.out.println("Invalid choice. Please enter again.");
-				isPhotoError = true;
-			}
 
 		} while (isPhotoError);
 
