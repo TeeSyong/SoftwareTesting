@@ -173,9 +173,9 @@ public class Order {
 							String addOpt = scanner.nextLine();
 							scanner.nextLine();
 							if (addOpt.equals("1")) {
-								newPhoto.isHighQualityPaper = true;
+								newPhoto.setIsHighQualityEffect(true);
 							} else if (addOpt.equals("2")) {
-								newPhoto.isDesignEffect = true;
+								newPhoto.setIsDesignEffect(true);
 							}
 
 							printingOrders.add(newPhoto);

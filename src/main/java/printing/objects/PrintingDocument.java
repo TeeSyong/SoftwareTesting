@@ -7,6 +7,7 @@ public class PrintingDocument extends IPrintingOrder {
 	{
 		super(PrintingType.Document,pOpt,qtt);
 	}
+	
 	@Override
 	public double getTotal()
 	{
@@ -24,6 +25,10 @@ public class PrintingDocument extends IPrintingOrder {
 	}
 	
 	public double getBlackAndWhiteCharge(){
+		if(quantity <=0)
+			throw new IllegalArgumentException("Invalid Quantity, quantity cannot be negative");
+		else if(quantity >50)
+			throw new IllegalArgumentException("Invalid Quantity, Maximum 50 copies per printing");
 		if(quantity < 5)
 			return 0.5;
 		else if (quantity >= 5 && quantity <= 10)
@@ -35,6 +40,10 @@ public class PrintingDocument extends IPrintingOrder {
 	}
 	
 	public double getColourCharge() {
+		if(quantity <=0)
+			throw new IllegalArgumentException("Invalid Quantity, quantity cannot be negative");
+		else if(quantity >50)
+			throw new IllegalArgumentException("Invalid Quantity, Maximum 50 copies per printing");
 		if(quantity < 5)
 			return 1;
 		else if (quantity >= 5 && quantity <= 10)
