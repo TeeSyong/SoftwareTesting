@@ -1,13 +1,16 @@
 package printing.app;
 
 import java.util.ArrayList;
+import printing.objects.IPrintingOrder;
 import java.util.Scanner;
 
 import printing.objects.*;
 
-public class Order {
 
-	public static ArrayList<IPrintingOrder> printingOrders = new ArrayList<IPrintingOrder>();
+public class Order{
+	
+	
+
 	private static Scanner scanner;
 
 	public static void main(String[] args) {
@@ -60,9 +63,9 @@ public class Order {
 
 		System.out.println("Proceeding to Billing...");
 		double totalBill = 0;
-		for (int i = 0; i < printingOrders.size(); i++) {
-			double bill=printingOrders.get(i).getTotal();
-			System.out.println((i+1)+": Order "+ printingOrders.get(i).printingOpt  + "Quantity= " +printingOrders.get(i).quantity+ " and bill is: " +bill);
+		for (int i = 0; i < IPrintingOrder.printingOrders.size(); i++) {
+			double bill=IPrintingOrder.printingOrders.get(i).getTotal();
+			System.out.println((i+1)+": Order "+IPrintingOrder.printingOrders.get(i).printingOpt  + "Quantity= " +IPrintingOrder.printingOrders.get(i).quantity+ " and bill is: " +bill);
 			totalBill += bill;
 		}
 		System.out.print("Your billing total is " + totalBill);
@@ -108,7 +111,7 @@ public class Order {
 								pOpt = PrintingOption.Colour;
 							}
 							PrintingDocument newDoc = new PrintingDocument(pOpt, Qtt);
-							printingOrders.add(newDoc);
+							IPrintingOrder.printingOrders.add(newDoc);
 						}
 					}
 					catch(Exception e){
@@ -178,7 +181,7 @@ public class Order {
 								newPhoto.setIsDesignEffect(true);
 							}
 
-							printingOrders.add(newPhoto);
+							IPrintingOrder.printingOrders.add(newPhoto);
 						}
 					}
 					catch(Exception e){

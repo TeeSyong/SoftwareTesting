@@ -2,7 +2,6 @@ package printing.objects;
 
 public class PrintingDocument extends IPrintingOrder {
 
-	
 	public PrintingDocument(PrintingOption pOpt,int qtt)
 	{
 		super(PrintingType.Document,pOpt,qtt);
@@ -53,4 +52,5 @@ public class PrintingDocument extends IPrintingOrder {
 		else
 			return 0.7;
 	}
+	
 }

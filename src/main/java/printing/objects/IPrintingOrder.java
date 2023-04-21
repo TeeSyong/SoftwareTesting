@@ -1,7 +1,11 @@
 package printing.objects;
 
+import java.util.ArrayList;
+
+
 public class IPrintingOrder {
 	
+	public static ArrayList<IPrintingOrder> printingOrders = new ArrayList<IPrintingOrder>();
 	public PrintingType printingType;
 	public PrintingOption printingOpt;
 	public int quantity;
@@ -18,8 +22,15 @@ public class IPrintingOrder {
 		this.printingOpt=pOpt;
 		this.quantity=qtt;
 	}
-
-
 	
+	public ArrayList<IPrintingOrder> getRequest(){
+		
+		return printingOrders;
+	}
+	
+	public void updateRequest(ArrayList<IPrintingOrder> orderArr)
+	{
+		//place the request into queue for printing
+	}
 }
 
