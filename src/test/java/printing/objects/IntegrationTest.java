@@ -11,14 +11,14 @@ import org.junit.Test;
 
 public class IntegrationTest {
 	ArrayList<String[]> linesRead= readER();
-	PrintingDocument orderDocumentBW = new PrintingDocument(PrintingOption.BlackWhite,30 );
-	PrintingDocument orderDocumentColour = new PrintingDocument(PrintingOption.Colour,30 );
-	PrintingPhoto orderNormalHighQuality = new PrintingPhoto(PrintingOption.Normal,20 );
-	PrintingPhoto orderNormalDesign = new PrintingPhoto(PrintingOption.Normal,20 );
-	PrintingPhoto orderNormal = new PrintingPhoto(PrintingOption.Normal,20 );
-	PrintingPhoto orderPassportHighQuality = new PrintingPhoto(PrintingOption.Passport,20 );
-	PrintingPhoto orderPassportDesign = new PrintingPhoto(PrintingOption.Passport,20 );
-	PrintingPhoto orderPassport = new PrintingPhoto(PrintingOption.Passport,20 );
+	IPrintingOrder orderDocumentBW = new PrintingDocument(PrintingOption.BlackWhite,30 );
+	IPrintingOrder orderDocumentColour = new PrintingDocument(PrintingOption.Colour,30 );
+	IPrintingOrder orderNormalHighQuality = new PrintingPhoto(PrintingOption.Normal,20 );
+	IPrintingOrder orderNormalDesign = new PrintingPhoto(PrintingOption.Normal,20 );
+	IPrintingOrder orderNormal = new PrintingPhoto(PrintingOption.Normal,20 );
+	IPrintingOrder orderPassportHighQuality = new PrintingPhoto(PrintingOption.Passport,20 );
+	IPrintingOrder orderPassportDesign = new PrintingPhoto(PrintingOption.Passport,20 );
+	IPrintingOrder orderPassport = new PrintingPhoto(PrintingOption.Passport,20 );
 	
 	
 	@Test
@@ -48,9 +48,9 @@ public class IntegrationTest {
 	{
 		double totalER = Double.parseDouble(linesRead.get(2)[0]);
 		double chargeER= Double.parseDouble(linesRead.get(2)[1]);
-		orderNormalHighQuality.setIsHighQualityEffect(true);
+		((PrintingPhoto)orderNormalHighQuality).setIsHighQualityEffect(true);
 		double totalAR = orderNormalHighQuality.getTotal();
-		double chargeAR = orderNormalHighQuality.getNormalCharge();
+		double chargeAR = ((PrintingPhoto)orderNormalHighQuality).getNormalCharge();
 		assertEquals(totalER,totalAR,0);
 		assertEquals(chargeER,chargeAR,0);
 	}
