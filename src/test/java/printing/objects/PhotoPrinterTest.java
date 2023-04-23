@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
@@ -29,9 +27,7 @@ public class PhotoPrinterTest {
 		assertEquals(orderMock.getRequest(),getOrderMock.printingOrders);
 		
 		inOrder.verify(orderMock).updateRequest(getOrderMock.printingOrders);
-		
-	
+			
 	}
-
-
+	
 }
