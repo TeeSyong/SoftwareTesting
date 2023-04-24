@@ -1,87 +1,78 @@
 package printing.objects;
 
-public class PrintingPhoto extends IPrintingOrder{
+public class PrintingPhoto extends IPrintingOrder {
 
-	private boolean isHighQualityPaper=false;
-	private boolean isDesignEffect=false;
-	
-	public PrintingPhoto(PrintingOption pOpt,int qtt)
-	{
-		super(PrintingType.Photo,pOpt,qtt);
+	private boolean isHighQualityPaper = false;
+	private boolean isDesignEffect = false;
+
+	public PrintingPhoto(PrintingOption pOpt, int qtt) {
+		super(PrintingType.Photo, pOpt, qtt);
 	}
+
 	@Override
-	public double getTotal()
-	{
-		
-		double charge=0;
-		if(printingOpt==PrintingOption.Normal)
-		{
-			charge=getNormalCharge();
+	public double getTotal() {
+
+		double charge = 0;
+		if (printingOpt == PrintingOption.Normal) {
+			charge = getNormalCharge();
+		} else if (printingOpt == PrintingOption.Passport) {
+			charge = getPassportCharge();
 		}
-		else if(printingOpt==PrintingOption.Passport)
-		{
-			charge=getPassportCharge();
-		}
-		sum=quantity*charge;
+		sum = quantity * charge;
 		return sum;
 	}
-	
+
 	public double getNormalCharge() {
-		double charge=0;
-		if(quantity <=0)
+		double charge = 0;
+		if (quantity <= 0)
 			throw new IllegalArgumentException("Invalid Quantity, quantity cannot be negative");
-		else if(quantity >50)
+		else if (quantity > 50)
 			throw new IllegalArgumentException("Invalid Quantity, Maximum 50 copies per printing");
-		if(quantity < 5)
-			charge=1;
+		if (quantity < 5)
+			charge = 1;
 		else if (quantity >= 5 && quantity <= 10)
-			charge=0.9;
-		else if(quantity >= 11 && quantity <= 20)
-			charge=0.75;
+			charge = 0.9;
+		else if (quantity >= 11 && quantity <= 20)
+			charge = 0.75;
 		else
-			charge=0.5;
-		if(isHighQualityPaper)
-		{
-			charge+=0.10;
+			charge = 0.5;
+		if (isHighQualityPaper) {
+			charge += 0.10;
 		}
-		if(isDesignEffect)
-		{
-			charge+=0.15;
+		if (isDesignEffect) {
+			charge += 0.15;
 		}
 		return charge;
 	}
-	
+
 	public double getPassportCharge() {
-		double charge=0;
-		if(quantity <=0)
+		double charge = 0;
+		if (quantity <= 0)
 			throw new IllegalArgumentException("Invalid Quantity, quantity cannot be negative");
-		else if(quantity >50)
+		else if (quantity > 50)
 			throw new IllegalArgumentException("Invalid Quantity, Maximum 50 copies per printing");
-		if(quantity < 5)
-			charge=1.2;
+		if (quantity < 5)
+			charge = 1.2;
 		else if (quantity >= 5 && quantity <= 10)
-			charge=0.95;
-		else if(quantity >= 11 && quantity <= 20)
-			charge=0.85;
+			charge = 0.95;
+		else if (quantity >= 11 && quantity <= 20)
+			charge = 0.85;
 		else
-			charge=0.75;
-		if(isHighQualityPaper)
-		{
-			charge+=0.10;
+			charge = 0.75;
+		if (isHighQualityPaper) {
+			charge += 0.10;
 		}
-		if(isDesignEffect)
-		{
-			charge+=0.15;
+		if (isDesignEffect) {
+			charge += 0.15;
 		}
 		return charge;
 	}
-	
+
 	public void setIsHighQualityEffect(boolean isHighQualityPaper) {
-		this.isHighQualityPaper=isHighQualityPaper;
+		this.isHighQualityPaper = isHighQualityPaper;
 	}
-	
+
 	public void setIsDesignEffect(boolean isDesignEffect) {
-		this.isDesignEffect=isDesignEffect;
+		this.isDesignEffect = isDesignEffect;
 	}
 }
-
